@@ -12,7 +12,7 @@ const shopSchema = new mongoose.Schema({
   address: String,
   isApproved: {
     type: Boolean,
-    default: true // keep true for now (no admin approval yet)
+    default: true 
   },
   location: {
     type: {

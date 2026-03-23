@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Geo index
+
 userSchema.index({ location: "2dsphere" });
 
 export default mongoose.model("User", userSchema);
