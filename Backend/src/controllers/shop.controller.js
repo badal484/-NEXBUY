@@ -1,14 +1,14 @@
 import Shop from "../models/shop.model.js";
 
-// ✅ Create Shop
+// Create Shop
 export const createShop = async (req, res) => {
   try {
     const { name, address, lng, lat } = req.body;
 
-    // ✅ Check if shop already exists
-    const existingShop = await Shop.findOne({ owner: req.user.id });
+    //  Check if shop already exists
+    const existingShop = await Shop.findOne({ owner: req.user.id });  
 
-    if (existingShop) {
+    if (existingShop) {         //also one seller can a only one shop
       return res.status(400).json({ msg: "You already have a shop" });
     }
 
@@ -28,8 +28,8 @@ export const createShop = async (req, res) => {
   }
 };
 
-// ✅ Get My Shop
-export const getMyShop = async (req, res) => {
+// Get My Shop
+export const getMyShop = async (req, res) => {      //to access the shop for its seller
   const shop = await Shop.findOne({ owner: req.user.id });
 
   if (!shop) {

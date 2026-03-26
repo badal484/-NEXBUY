@@ -2,18 +2,18 @@ import Product from "../models/product.model.js";
 import Shop from "../models/shop.model.js";
 import imagekit from "../config/imagekit.js";
 
-// ✅ Add Product (with Image Upload + Shop + Validation)
+//  Add Product (with Image Upload + Shop + Validation)
 export const addProduct = async (req, res) => {
   try {
     const { title, price, lng, lat } = req.body;
 
-    // ✅ Validation
+    //  Validation
     if (!title || !price || !lng || !lat) {
       return res.status(400).json({ msg: "All fields are required" });
     }
 
-    // ✅ Convert values safely
-    const parsedLng = parseFloat(lng);
+    // Convert values safely
+    const parsedLng = parseFloat(lng);    //since values will come in str but we want float
     const parsedLat = parseFloat(lat);
     const parsedPrice = parseInt(price);
 
@@ -21,7 +21,7 @@ export const addProduct = async (req, res) => {
       return res.status(400).json({ msg: "Invalid numeric values" });
     }
 
-    // ✅ Check seller has shop
+    // Check seller has shop
     const shop = await Shop.findOne({ owner: req.user.id });
 
     if (!shop) {
@@ -30,9 +30,9 @@ export const addProduct = async (req, res) => {
 
     let imageUrls = [];
 
-    // ✅ Upload image if provided
+    // Upload image if provided
     if (req.file) {
-      const result = await imagekit.upload({
+        const result = await imagekit.upload({
         file: req.file.buffer,
         fileName: req.file.originalname,
       });
@@ -40,7 +40,7 @@ export const addProduct = async (req, res) => {
       imageUrls.push(result.url);
     }
 
-    // ✅ Create product
+    //  Create product
     const product = await Product.create({
       title,
       price: parsedPrice,
@@ -59,18 +59,12 @@ export const addProduct = async (req, res) => {
   }
 };
 
-// ✅ Geo Search + Filters (Advanced + Safe)
+//  Geo Search + Filters (Advanced + Safe)
 export const getNearbyProducts = async (req, res) => {
   try {
-    const {
-      lng,
-      lat,
-      minPrice,
-      maxPrice,
-      distance = 5000,
-    } = req.query;
+    const {lng,lat,minPrice,maxPrice, distance = 5000,} = req.query;
 
-    // ✅ Validate location
+
     if (!lng || !lat) {
       return res.status(400).json({ msg: "Location is required" });
     }
@@ -95,7 +89,7 @@ export const getNearbyProducts = async (req, res) => {
       },
     };
 
-    // ✅ Price filter
+
     if (minPrice || maxPrice) {
       query.price = {};
 
@@ -106,7 +100,7 @@ export const getNearbyProducts = async (req, res) => {
     const products = await Product.find(query)
       .populate("shop", "name address")
       .populate("seller", "name email")
-      .sort({ createdAt: -1 }); // 🔥 latest first
+      .sort({ createdAt: -1 }); // latest first
 
     res.json(products);
   } catch (err) {

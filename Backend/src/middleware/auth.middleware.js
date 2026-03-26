@@ -1,21 +1,20 @@
 import jwt from "jsonwebtoken";
 
-export const protect = (req, res, next) => {
+export const protect = (req, res, next) => {        //its for checking valid login user
   try {
     let token = req.headers.authorization;
 
     if (!token) {
-      return res.status(401).json({ msg: "No token provided" });
+      return res.status(401).json({ msg: "Invalid user" });
     }
 
-    // ✅ REMOVE "Bearer "
     if (token.startsWith("Bearer ")) {
       token = token.split(" ")[1];
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = decoded;
+    req.user = decoded;   //to send decoded as object req to next (controller)
 
     next();
   } catch (err) {

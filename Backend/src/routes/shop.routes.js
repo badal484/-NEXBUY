@@ -5,8 +5,10 @@ import { createShop, getMyShop } from "../controllers/shop.controller.js";
 
 const router = express.Router();
 
-router.post("/create", protect, isSeller, createShop);
+router.post("/create", protect, isSeller, createShop);      //to create shop
 
 router.get("/my", protect, isSeller, getMyShop);
 
 export default router;
+
+
