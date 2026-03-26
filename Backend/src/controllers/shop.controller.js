@@ -1,11 +1,9 @@
 import Shop from "../models/shop.model.js";
 
-// ✅ Create Shop
 export const createShop = async (req, res) => {
   try {
     const { name, address, lng, lat } = req.body;
 
-    // ✅ Check if shop already exists
     const existingShop = await Shop.findOne({ owner: req.user.id });
 
     if (existingShop) {
@@ -28,7 +26,6 @@ export const createShop = async (req, res) => {
   }
 };
 
-// ✅ Get My Shop
 export const getMyShop = async (req, res) => {
   const shop = await Shop.findOne({ owner: req.user.id });
 

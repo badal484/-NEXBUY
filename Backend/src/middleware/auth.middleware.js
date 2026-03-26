@@ -8,7 +8,6 @@ export const protect = (req, res, next) => {
       return res.status(401).json({ msg: "No token provided" });
     }
 
-    // ✅ REMOVE "Bearer "
     if (token.startsWith("Bearer ")) {
       token = token.split(" ")[1];
     }
