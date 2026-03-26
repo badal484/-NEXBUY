@@ -2,7 +2,6 @@ import Product from "../models/product.model.js";
 import Shop from "../models/shop.model.js";
 import imagekit from "../config/imagekit.js";
 
-
 export const addProduct = async (req, res) => {
   try {
     const { title, price, lng, lat } = req.body;
@@ -20,7 +19,6 @@ export const addProduct = async (req, res) => {
       return res.status(400).json({ msg: "Invalid numeric values" });
     }
 
-
     const shop = await Shop.findOne({ owner: req.user.id });
 
     if (!shop) {
@@ -30,7 +28,7 @@ export const addProduct = async (req, res) => {
     let imageUrls = [];
 
     if (req.file) {
-      const result = await imagekit.upload({
+        const result = await imagekit.upload({
         file: req.file.buffer,
         fileName: req.file.originalname,
       });
@@ -56,16 +54,10 @@ export const addProduct = async (req, res) => {
   }
 };
 
-
 export const getNearbyProducts = async (req, res) => {
   try {
-    const {
-      lng,
-      lat,
-      minPrice,
-      maxPrice,
-      distance = 5000,
-    } = req.query;
+    const {lng,lat,minPrice,maxPrice, distance = 5000,} = req.query;
+
 
     if (!lng || !lat) {
       return res.status(400).json({ msg: "Location is required" });
