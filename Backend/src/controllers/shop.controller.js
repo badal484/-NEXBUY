@@ -6,7 +6,7 @@ export const createShop = async (req, res) => {
 
     const existingShop = await Shop.findOne({ owner: req.user.id });
 
-    if (existingShop) {
+    if (existingShop) {         //also one seller can a only one shop
       return res.status(400).json({ msg: "You already have a shop" });
     }
 
