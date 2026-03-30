@@ -13,6 +13,9 @@ app.use('/api/auth', authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/shop", shopRoutes);
 app.use("/api/product", productRoutes);
-
+// Add this before your app.listen()
+app.get('/', (req, res) => {
+  res.status(200).send("Backend is live and running!");
+});
 
 export default app;
