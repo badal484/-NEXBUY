@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export const protect = (req, res, next) => {        //its for checking valid login user
+export const protect = (req, res, next) => {       
   try {
     let token = req.headers.authorization;
 
@@ -14,7 +14,7 @@ export const protect = (req, res, next) => {        //its for checking valid log
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = decoded;   //to send decoded as object req to next (controller)
+    req.user = decoded;   
 
     next();
   } catch (err) {

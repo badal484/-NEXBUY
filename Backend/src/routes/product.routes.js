@@ -14,5 +14,7 @@ router.post("/add", protect, isSeller, upload.single("image"), addProduct);
 
 router.get("/nearby", getNearbyProducts);
 
+
+
 export default router;
 

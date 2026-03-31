@@ -7,6 +7,6 @@ export const becomeSeller = async (req, res) => {
     { new: true }
   );
 
-  res.json(user); //response 
+  res.json(user); 
 };
 
