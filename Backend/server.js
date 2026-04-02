@@ -6,17 +6,12 @@ import { connectDB } from "./src/config/db.js";
 import { createServer } from "http";
 
 
-// ✅ Create HTTP server
+
 const server = createServer(app);
 
-// ✅ Connect Database
 connectDB();
 
-// ✅ Initialize Socket.io
-
-
-// ✅ Start Server
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5004;
 
 server.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
