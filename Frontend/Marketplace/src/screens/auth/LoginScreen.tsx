@@ -1,13 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-} from "react-native";
+import {View,Text,TextInput,TouchableOpacity,StyleSheet,Alert} from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
