@@ -28,7 +28,11 @@ export const addProduct = async (req, res) => {
     let imageUrls = [];
 
     if (req.file) {
-        const result = await imagekit.upload({
+      if (!imagekit) {
+        return res.status(500).json({ msg: "Image upload is not configured" });
+      }
+
+      const result = await imagekit.upload({
         file: req.file.buffer,
         fileName: req.file.originalname,
       });
